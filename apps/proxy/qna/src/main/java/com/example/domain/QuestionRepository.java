@@ -1,0 +1,7 @@
+package com.example.domain;
+
+import java.util.Optional;
+
+public interface QuestionRepository {
+    Optional<Question> findById(Long id);
+}
