@@ -1,0 +1,14 @@
+type MemberResponse {
+    id: ID
+    name: String
+    age: Int
+}
+
+type Query {
+    findMember(id: ID): MemberResponse
+    findMembers: [MemberResponse]
+}
+
+type Mutation {
+    signUp(userId: String, password: String): MemberResponse
+}

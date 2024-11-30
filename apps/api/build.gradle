@@ -1,0 +1,22 @@
+dependencies {
+    // GraphQL
+    implementation 'org.springframework.boot:spring-boot-starter-graphql'
+    implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:13.0.1'
+
+    // 롬복
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // proxy 모듈
+    implementation project(':apps:proxy:coffee')
+    implementation project(':apps:proxy:member')
+    implementation project(':apps:proxy:payment')
+    implementation project(':apps:proxy:qna')
+
+    // lib 모듈
+    implementation project(':lib')
+}
+
+test {
+    useJUnitPlatform()
+}
