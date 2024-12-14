@@ -3,11 +3,11 @@ package com.example.framework.adapter.in.controller;
 import com.example.application.port.in.CreateInputPort;
 import com.example.application.port.in.DeleteInputPort;
 import com.example.application.port.in.ModifyInputPort;
+import com.example.framework.adapter.in.dto.in.CreateQuestionIn;
+import com.example.framework.adapter.in.dto.out.CreateQuestionOut;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * QnA 컨트롤러
@@ -24,8 +24,11 @@ public class QnAController {
      * 게시글 추가
      */
     @PostMapping("/questions")
-    public void createQuestion() {
-
+    public ResponseEntity<CreateQuestionOut> createQuestion(
+            @RequestBody CreateQuestionIn createQuestionIn) {
+        CreateQuestionOut createQuestionOut = createInputPort.createQuestion(createQuestionIn);
+        System.out.println("게시글 추가 응답 : " + createQuestionOut);
+        return ResponseEntity.ok(createQuestionOut);
     }
 
     /**

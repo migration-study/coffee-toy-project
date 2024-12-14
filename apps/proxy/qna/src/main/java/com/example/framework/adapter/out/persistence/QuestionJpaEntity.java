@@ -45,4 +45,15 @@ public class QuestionJpaEntity {
         this.writerId = writerId;
         this.createdAt = LocalDateTime.now();
     }
+
+    public QuestionJpaEntity(
+            Long id,
+            String contents,
+            boolean deleted,
+            String title,
+            Long writerId,
+            LocalDateTime createdAt) {
+        this(id, contents, deleted, title, writerId);
+        this.createdAt = createdAt;
+    }
 }
