@@ -3,7 +3,9 @@ package com.example.framework.adapter.in.controller;
 import com.example.application.port.in.CreateInputPort;
 import com.example.application.port.in.DeleteInputPort;
 import com.example.application.port.in.ModifyInputPort;
+import com.example.framework.adapter.in.dto.in.CreateAnswerIn;
 import com.example.framework.adapter.in.dto.in.CreateQuestionIn;
+import com.example.framework.adapter.in.dto.out.CreateAnswerOut;
 import com.example.framework.adapter.in.dto.out.CreateQuestionOut;
 import com.example.framework.adapter.in.dto.out.DeleteQuestionOut;
 import lombok.RequiredArgsConstructor;
@@ -47,8 +49,11 @@ public class QnAController {
      * 게시글 답변 추가
      */
     @PostMapping("/questions/{questionId}/answers")
-    public void createAnswer() {
-
+    public ResponseEntity<CreateAnswerOut> createAnswer(
+            @PathVariable(value = "questionId") Long questionId,
+            @RequestBody CreateAnswerIn createAnswerIn) {
+        CreateAnswerOut createAnswerOut = createInputPort.createAnswer(questionId, createAnswerIn);
+        return ResponseEntity.ok(createAnswerOut);
     }
 
     /**

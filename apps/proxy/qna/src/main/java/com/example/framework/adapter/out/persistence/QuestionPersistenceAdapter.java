@@ -1,8 +1,8 @@
 package com.example.framework.adapter.out.persistence;
 
-import com.example.application.port.out.DeleteOutPutPort;
-import com.example.application.port.out.LoadOutPutPort;
-import com.example.application.port.out.SaveOutPutPort;
+import com.example.application.port.out.QuestionDeleteOutPutPort;
+import com.example.application.port.out.QuestionLoadOutPutPort;
+import com.example.application.port.out.QuestionSaveOutPutPort;
 import com.example.domain.entity.QuestionRefactoring;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
 @Component
  @RequiredArgsConstructor
  public class QuestionPersistenceAdapter implements
-        SaveOutPutPort,
-        LoadOutPutPort,
-        DeleteOutPutPort {
+        QuestionSaveOutPutPort,
+        QuestionLoadOutPutPort,
+        QuestionDeleteOutPutPort {
     private final QuestionMapper questionMapper;
     private final QuestionJpaRepository questionJpaRepository;
 

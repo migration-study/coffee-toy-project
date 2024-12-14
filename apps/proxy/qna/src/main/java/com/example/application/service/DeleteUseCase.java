@@ -1,8 +1,8 @@
 package com.example.application.service;
 
 import com.example.application.port.in.DeleteInputPort;
-import com.example.application.port.out.DeleteOutPutPort;
-import com.example.application.port.out.LoadOutPutPort;
+import com.example.application.port.out.QuestionDeleteOutPutPort;
+import com.example.application.port.out.QuestionLoadOutPutPort;
 import com.example.domain.NsUser;
 import com.example.domain.entity.DeleteHistory;
 import com.example.domain.entity.Question;
@@ -34,8 +34,8 @@ public class DeleteUseCase implements DeleteInputPort {
     @Resource(name = "answerRepository")
     private AnswerRepository answerRepository;
 
-    private final LoadOutPutPort loadOutPutPort;
-    private final DeleteOutPutPort deleteOutPutPort;
+    private final QuestionLoadOutPutPort questionLoadOutPutPort;
+    private final QuestionDeleteOutPutPort questionDeleteOutPutPort;
 
     /**
      * 기존 코드
@@ -61,11 +61,11 @@ public class DeleteUseCase implements DeleteInputPort {
     @Override
     @Transactional
     public DeleteQuestionOut deleteQuestion(Long questionId) {
-        QuestionRefactoring question = loadOutPutPort.loadQuestion(questionId);
+        QuestionRefactoring question = questionLoadOutPutPort.loadQuestion(questionId);
         long loadQuestionId = question.getId();
         System.out.println("load questionId : " + loadQuestionId);
 
-        deleteOutPutPort.deleteQuestion(question);
+        questionDeleteOutPutPort.deleteQuestion(question);
         return DeleteQuestionOut.createSuccess(loadQuestionId);
     }
 

@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.framework.adapter.out.persistence.AnswerJpaEntity;
+import com.example.framework.adapter.out.persistence.AnswerJpaRepository;
 import com.example.framework.adapter.out.persistence.QuestionJpaEntity;
 import com.example.framework.adapter.out.persistence.QuestionJpaRepository;
 import jakarta.annotation.PostConstruct;
@@ -10,10 +12,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class QnaDataInitializer {
     private final QuestionJpaRepository questionJpaRepository;
+    private final AnswerJpaRepository answerJpaRepository;
 
     @PostConstruct
     public void initializeDataSet() {
         initializeQuestionDataSet();
+        initializeAnswerDataSet();
     }
 
     private void initializeQuestionDataSet() {
@@ -35,5 +39,24 @@ public class QnaDataInitializer {
 
         questionJpaRepository.save(question1);
         questionJpaRepository.save(question2);
+    }
+
+    private void initializeAnswerDataSet() {
+        AnswerJpaEntity answer1 = new AnswerJpaEntity(
+            1L,
+            1L,
+            1L,
+            "게시글 답글1"
+        );
+
+        AnswerJpaEntity answer2 = new AnswerJpaEntity(
+                2L,
+                1L,
+                1L,
+                "게시글 답글2"
+        );
+
+        answerJpaRepository.save(answer1);
+        answerJpaRepository.save(answer2);
     }
 }

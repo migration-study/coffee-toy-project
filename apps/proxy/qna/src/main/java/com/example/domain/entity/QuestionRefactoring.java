@@ -35,4 +35,10 @@ public class QuestionRefactoring {
         this.deleted = deleted;
         this.createdDate = createdDate;
     }
+
+    public void checkCanAddAnswer() {
+        if (deleted) {
+            throw new IllegalStateException("이미 게시글이 삭제되어 답글이 불가능합니다.");
+        }
+    }
 }
