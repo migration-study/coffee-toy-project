@@ -5,6 +5,7 @@ import com.example.application.port.in.DeleteInputPort;
 import com.example.application.port.in.ModifyInputPort;
 import com.example.framework.adapter.in.dto.in.CreateQuestionIn;
 import com.example.framework.adapter.in.dto.out.CreateQuestionOut;
+import com.example.framework.adapter.in.dto.out.DeleteQuestionOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +33,29 @@ public class QnAController {
     }
 
     /**
+     * 게시글 삭제
+     */
+    @DeleteMapping("/questions/{questionId}")
+    public ResponseEntity<DeleteQuestionOut> deleteQuestion(
+            @PathVariable(value = "questionId") Long questionId) {
+        DeleteQuestionOut deleteQuestionOut = deleteInputPort.deleteQuestion(questionId);
+        System.out.println("게시글 삭제 응답 : " + deleteQuestionOut);
+        return ResponseEntity.ok(deleteQuestionOut);
+    }
+
+    /**
      * 게시글 답변 추가
      */
     @PostMapping("/questions/{questionId}/answers")
     public void createAnswer() {
+
+    }
+
+    /**
+     * 게시글 답변 삭제
+     */
+    @DeleteMapping("/answers/{answerId}")
+    public void deleteAnswer() {
 
     }
 
@@ -52,22 +72,6 @@ public class QnAController {
      */
     @PostMapping("/coffees/{coffeeId}/price")
     public void modifyCoffeePrice() {
-
-    }
-
-    /**
-     * 게시글 삭제
-     */
-    @DeleteMapping("/questions/{questionId}")
-    public void deleteQuestion() {
-
-    }
-
-    /**
-     * 게시글 답변 삭제
-     */
-    @DeleteMapping("/answers/{answerId}")
-    public void deleteAnswer() {
 
     }
 }

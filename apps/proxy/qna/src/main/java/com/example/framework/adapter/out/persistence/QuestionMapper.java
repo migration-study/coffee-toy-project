@@ -15,4 +15,15 @@ public class QuestionMapper {
                 question.getCreatedDate()
         );
     }
+
+    public QuestionRefactoring entityToDomain(QuestionJpaEntity questionJpaEntity) {
+        return new QuestionRefactoring(
+                questionJpaEntity.getId(),
+                questionJpaEntity.getWriterId(),
+                questionJpaEntity.getTitle(),
+                questionJpaEntity.getContents(),
+                questionJpaEntity.getDeleted(),
+                questionJpaEntity.getCreatedAt()
+        );
+    }
 }

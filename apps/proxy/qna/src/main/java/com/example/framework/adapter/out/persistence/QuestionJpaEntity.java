@@ -1,10 +1,12 @@
 package com.example.framework.adapter.out.persistence;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "question")
 @NoArgsConstructor

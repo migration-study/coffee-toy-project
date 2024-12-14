@@ -24,4 +24,15 @@ public class QuestionRefactoring {
         this.deleted = false;
         this.createdDate = LocalDateTime.now();
     }
+
+    public QuestionRefactoring(Long id,
+                               Long writerId,
+                               String title,
+                               String content,
+                               boolean deleted,
+                               LocalDateTime createdDate) {
+        this(id, writerId, title, content);
+        this.deleted = deleted;
+        this.createdDate = createdDate;
+    }
 }
