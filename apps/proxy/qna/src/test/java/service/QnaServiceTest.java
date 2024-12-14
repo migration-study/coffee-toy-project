@@ -1,26 +1,17 @@
 package service;
 
-import com.example.CannotDeleteException;
-import com.example.domain.*;
-import com.example.service.DeleteHistoryService;
-import com.example.service.QnAService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import com.example.domain.entity.Answer;
+import com.example.domain.entity.Question;
+import com.example.domain.repository.QuestionRepository;
+import com.example.application.service.DeleteUseCase;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class QnaServiceTest {
@@ -28,10 +19,10 @@ public class QnaServiceTest {
     private QuestionRepository questionRepository;
 
     @Mock
-    private DeleteHistoryService deleteHistoryService;
+    private DeleteUseCase deleteUseCase;
 
     @InjectMocks
-    private QnAService qnAService;
+    private QuestionUseCase questionUseCase;
 
     private Question question;
     private Answer answer;

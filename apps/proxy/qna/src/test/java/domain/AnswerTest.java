@@ -1,8 +1,6 @@
 package domain;
 
 
-import com.example.domain.Answer;
-
 public class AnswerTest {
     /**
      * ToDO

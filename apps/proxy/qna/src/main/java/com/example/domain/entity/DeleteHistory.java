@@ -1,4 +1,7 @@
-package com.example.domain;
+package com.example.domain.entity;
+
+import com.example.domain.constant.ContentType;
+import com.example.domain.NsUser;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

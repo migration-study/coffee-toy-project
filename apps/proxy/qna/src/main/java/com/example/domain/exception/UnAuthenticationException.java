@@ -1,4 +1,4 @@
-package com.example;
+package com.example.domain.exception;
 
 public class UnAuthenticationException extends Exception {
     private static final long serialVersionUID = 1L;

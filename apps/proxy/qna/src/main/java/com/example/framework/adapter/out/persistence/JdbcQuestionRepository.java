@@ -1,7 +1,7 @@
-package com.example.infrastructure;
+package com.example.framework.adapter.out.persistence;
 
-import com.example.domain.Question;
-import com.example.domain.QuestionRepository;
+import com.example.domain.entity.Question;
+import com.example.domain.repository.QuestionRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

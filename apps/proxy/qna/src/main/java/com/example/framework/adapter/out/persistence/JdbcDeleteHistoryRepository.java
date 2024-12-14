@@ -1,7 +1,7 @@
-package com.example.infrastructure;
+package com.example.framework.adapter.out.persistence;
 
-import com.example.domain.DeleteHistory;
-import com.example.domain.DeleteHistoryRepository;
+import com.example.domain.entity.DeleteHistory;
+import com.example.domain.repository.DeleteHistoryRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

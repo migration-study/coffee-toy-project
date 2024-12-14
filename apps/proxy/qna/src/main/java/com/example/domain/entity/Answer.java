@@ -1,7 +1,8 @@
-package com.example.domain;
+package com.example.domain.entity;
 
-import com.example.NotFoundException;
-import com.example.UnAuthorizedException;
+import com.example.domain.exception.NotFoundException;
+import com.example.domain.exception.UnAuthorizedException;
+import com.example.domain.NsUser;
 
 import java.time.LocalDateTime;
 
