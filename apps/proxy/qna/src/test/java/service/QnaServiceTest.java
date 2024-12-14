@@ -3,7 +3,7 @@ package service;
 import com.example.domain.entity.Answer;
 import com.example.domain.entity.Question;
 import com.example.domain.repository.QuestionRepository;
-import com.example.application.service.DeleteUseCase;
+import com.example.application.service.question.DeleteQuestionUseCase;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -19,7 +19,7 @@ public class QnaServiceTest {
     private QuestionRepository questionRepository;
 
     @Mock
-    private DeleteUseCase deleteUseCase;
+    private DeleteQuestionUseCase deleteUseCase;
 
     @InjectMocks
 //    private QuestionUseCase questionUseCase;

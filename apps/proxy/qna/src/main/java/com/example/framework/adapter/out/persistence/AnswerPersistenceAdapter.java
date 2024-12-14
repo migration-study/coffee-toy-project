@@ -1,8 +1,8 @@
 package com.example.framework.adapter.out.persistence;
 
-import com.example.application.port.out.AnswerDeleteOutPutPort;
-import com.example.application.port.out.AnswerLoadOutPutPort;
-import com.example.application.port.out.AnswerSaveOutPutPort;
+import com.example.application.port.out.answer.AnswerDeleteOutPutPort;
+import com.example.application.port.out.answer.AnswerLoadOutPutPort;
+import com.example.application.port.out.answer.AnswerSaveOutPutPort;
 import com.example.domain.entity.AnswerRefactoring;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -1,10 +1,11 @@
-package com.example.application.service;
+package com.example.application.service.question;
 
-import com.example.application.port.in.DeleteInputPort;
-import com.example.application.port.out.AnswerDeleteOutPutPort;
-import com.example.application.port.out.AnswerLoadOutPutPort;
-import com.example.application.port.out.QuestionDeleteOutPutPort;
-import com.example.application.port.out.QuestionLoadOutPutPort;
+import com.example.application.port.in.answer.DeleteAnswerInputPort;
+import com.example.application.port.in.question.DeleteQuestionInputPort;
+import com.example.application.port.out.answer.AnswerDeleteOutPutPort;
+import com.example.application.port.out.answer.AnswerLoadOutPutPort;
+import com.example.application.port.out.question.QuestionDeleteOutPutPort;
+import com.example.application.port.out.question.QuestionLoadOutPutPort;
 import com.example.domain.NsUser;
 import com.example.domain.entity.AnswerRefactoring;
 import com.example.domain.entity.DeleteHistory;
@@ -27,7 +28,7 @@ import java.util.List;
 
 @Service("deleteHistoryService")
 @RequiredArgsConstructor
-public class DeleteUseCase implements DeleteInputPort {
+public class DeleteQuestionUseCase implements DeleteQuestionInputPort {
     /**
      * 기존 코드
      */
@@ -40,8 +41,6 @@ public class DeleteUseCase implements DeleteInputPort {
 
     private final QuestionLoadOutPutPort questionLoadOutPutPort;
     private final QuestionDeleteOutPutPort questionDeleteOutPutPort;
-    private final AnswerLoadOutPutPort answerLoadOutPutPort;
-    private final AnswerDeleteOutPutPort answerDeleteOutPutPort;
 
     /**
      * 기존 코드
@@ -73,15 +72,5 @@ public class DeleteUseCase implements DeleteInputPort {
 
         questionDeleteOutPutPort.deleteQuestion(question);
         return DeleteQuestionOut.createSuccess(loadQuestionId);
-    }
-
-    @Override
-    public DeleteAnswerOut deleteAnswer(Long answerId) {
-        AnswerRefactoring answer = answerLoadOutPutPort.loadAnswerById(answerId);
-        if (!answer.isDeleted()) {
-            answerDeleteOutPutPort.deleteAnswer(answer);
-        }
-
-        return DeleteAnswerOut.createSuccess(answer);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.application.port.out;
+package com.example.application.port.out.question;
 
 import com.example.domain.entity.QuestionRefactoring;
 
