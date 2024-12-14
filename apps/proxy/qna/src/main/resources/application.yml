@@ -12,3 +12,14 @@ spring:
     console:
       path: /h2-console
       enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG        # 실행된 SQL 쿼리를 출력
+        type: trace       # 쿼리에 바인딩된 파라미터를 출력
+      springframework:
+        jdbc:
+          datasource:
+            init: DEBUG   # 데이터 초기화 관련 로그 출력
