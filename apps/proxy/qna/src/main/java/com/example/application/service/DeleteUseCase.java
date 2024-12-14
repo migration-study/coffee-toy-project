@@ -27,9 +27,6 @@ public class DeleteUseCase implements DeleteInputPort {
     @Resource(name = "answerRepository")
     private AnswerRepository answerRepository;
 
-    @Resource(name = "deleteHistoryService")
-    private DeleteUseCase deleteUseCase;
-
     @Transactional
     public void deleteQuestion(NsUser loginUser, long questionId) throws CannotDeleteException {
         Question question = questionRepository.findById(questionId).orElseThrow(IllegalArgumentException::new);
@@ -37,7 +34,7 @@ public class DeleteUseCase implements DeleteInputPort {
 
         List<DeleteHistory> deleteHistories = new ArrayList<>();
         question.updateToDelete(deleteHistories);
-        deleteUseCase.saveAll(deleteHistories);
+        saveAll(deleteHistories);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
