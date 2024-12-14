@@ -7,6 +7,7 @@ import com.example.framework.adapter.in.dto.in.CreateAnswerIn;
 import com.example.framework.adapter.in.dto.in.CreateQuestionIn;
 import com.example.framework.adapter.in.dto.out.CreateAnswerOut;
 import com.example.framework.adapter.in.dto.out.CreateQuestionOut;
+import com.example.framework.adapter.in.dto.out.DeleteAnswerOut;
 import com.example.framework.adapter.in.dto.out.DeleteQuestionOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -60,8 +61,9 @@ public class QnAController {
      * 게시글 답변 삭제
      */
     @DeleteMapping("/answers/{answerId}")
-    public void deleteAnswer() {
-
+    public ResponseEntity<DeleteAnswerOut> deleteAnswer(@PathVariable(value = "answerId") Long answerId) {
+        DeleteAnswerOut deleteAnswerOut = deleteInputPort.deleteAnswer(answerId);
+        return ResponseEntity.ok(deleteAnswerOut);
     }
 
     /**

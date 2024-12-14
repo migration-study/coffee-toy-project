@@ -22,4 +22,13 @@ public class AnswerMapper {
                 answer.getContent()
         );
     }
+
+    public AnswerJpaEntity domainToEntityAtDelete(AnswerRefactoring answer) {
+        return new AnswerJpaEntity(
+                answer.getId(),
+                null,
+                answer.getWriterId(),
+                answer.getContent()
+        );
+    }
 }

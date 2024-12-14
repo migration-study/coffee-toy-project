@@ -1,5 +1,6 @@
 package com.example.framework.adapter.out.persistence;
 
+import com.example.application.port.out.AnswerDeleteOutPutPort;
 import com.example.application.port.out.AnswerLoadOutPutPort;
 import com.example.application.port.out.AnswerSaveOutPutPort;
 import com.example.domain.entity.AnswerRefactoring;
@@ -12,7 +13,8 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class AnswerPersistenceAdapter implements
         AnswerLoadOutPutPort,
-        AnswerSaveOutPutPort {
+        AnswerSaveOutPutPort,
+        AnswerDeleteOutPutPort {
     private final AnswerMapper answerMapper;
     private final AnswerJpaRepository answerJpaRepository;
 
@@ -24,8 +26,21 @@ public class AnswerPersistenceAdapter implements
     }
 
     @Override
+    public AnswerRefactoring loadAnswerById(Long answerId) {
+        AnswerJpaEntity answerJpaEntity = answerJpaRepository.findById(answerId)
+                .orElseThrow(NoSuchElementException::new);
+        return answerMapper.entityToDomain(answerJpaEntity);
+    }
+
+    @Override
     public void saveAnswer(AnswerRefactoring answer) {
         AnswerJpaEntity answerJpaEntity = answerMapper.domainToEntity(answer);
         answerJpaRepository.save(answerJpaEntity);
+    }
+
+    @Override
+    public void deleteAnswer(AnswerRefactoring answer) {
+        AnswerJpaEntity answerJpaEntity = answerMapper.domainToEntityAtDelete(answer);
+        answerJpaRepository.delete(answerJpaEntity);
     }
 }
