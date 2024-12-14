@@ -22,7 +22,7 @@ public class QnaServiceTest {
     private DeleteUseCase deleteUseCase;
 
     @InjectMocks
-    private QuestionUseCase questionUseCase;
+//    private QuestionUseCase questionUseCase;
 
     private Question question;
     private Answer answer;
