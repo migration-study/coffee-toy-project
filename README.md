@@ -1,7 +1,7 @@
 # 커피 주문 시스템
 
 #### 멀티 모듈 구조
-- api 모듈:
+- api 모듈: BFF 모듈(프론트 및 Gateway 모듈)
 - proxy.coffee 모듈: 커피 모듈(수정)
 - proxy.member 모듈: 회원 모듈(수정)
 - proxy.payment 모듈: 결제 모듈(상권)
