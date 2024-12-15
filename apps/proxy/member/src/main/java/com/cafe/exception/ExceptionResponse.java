@@ -1,19 +1,27 @@
 package com.cafe.exception;
 
+import lombok.Setter;
+
 public class ExceptionResponse {
-    private final String type;
+    private final int status;
     private final String message;
 
-    public ExceptionResponse(String type, String message) {
-        this.type = type;
-        this.message = message;
-
-        printExceptionMessage();
+    public ExceptionResponse(ErrorCode errorCode) {
+        this.status = errorCode.getStatus();
+        this.message = errorCode.getMessage();
     }
 
-    public void printExceptionMessage() {
+    public ExceptionResponse(ErrorCode errorCode, String detail) {
+        this.status = errorCode.getStatus();
+        this.message = errorCode.getMessage();
+
+        printExceptionMessage(detail);
+    }
+
+    public void printExceptionMessage(String detail) {
         System.out.println("******** Exception ********");
-        System.out.println("type : "+type);
-        System.out.println("message : "+message);
+        System.out.println("status : " + status);
+        System.out.println("message : " + message);
+        System.out.println("detail : " + detail);
     }
 }

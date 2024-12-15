@@ -12,9 +12,5 @@ public class MemberInfoDTO {
     private String password;
     private String email;
     private String name;
-    private boolean isManager;
-
-    public boolean isManager() {
-        return isManager;
-    }
+    private boolean manager;
 }

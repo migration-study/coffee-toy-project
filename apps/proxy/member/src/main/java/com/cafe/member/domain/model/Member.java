@@ -2,8 +2,11 @@ package com.cafe.member.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
@@ -14,14 +17,24 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column (length = 12, nullable = false)
     private String userId;
+
+    @Column (nullable = false)
     private String password;
+
     private String email;
     private String name;
-    private LocalDate createDate;
-    private boolean isManager;
+    private boolean manager;
 
-    public static Member createMember(String userId, String password, String email, String name, boolean isManager) {
+    @CreationTimestamp
+    private LocalDateTime createDate;
+
+    @UpdateTimestamp
+    private LocalDateTime updateDate;
+
+    public static Member createMember(String userId, String password, String email, String name, boolean manager) {
         checkUserId(userId);
         checkPassword(password);
 
@@ -30,8 +43,7 @@ public class Member {
         member.setPassword(password);
         member.setEmail(email);
         member.setName(name);
-        member.setCreateDate(LocalDate.now());
-        member.setManager(isManager);
+        member.setManager(manager);
 
         System.out.println(member);
 
@@ -39,7 +51,7 @@ public class Member {
     }
 
     public static void checkUserId(String userId) {
-        if (userId.isEmpty()) {
+        if (userId == null || userId.isEmpty()) {
             throw new IllegalArgumentException("아이디를 입력하세요.");
         }
 
@@ -49,7 +61,7 @@ public class Member {
     }
 
     public static void checkPassword(String password) {
-        if (password.isEmpty()) {
+        if (password == null || password.isEmpty()) {
             throw new IllegalArgumentException("비밀번호를 입력하세요.");
         }
     }
@@ -70,19 +82,16 @@ public class Member {
         return name.equals(member.name) && email.equals(member.email);
     }
 
-    public boolean isManager() {
-        return isManager;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
+        return "Member{" +
                 "id=" + id +
                 ", userId='" + userId + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", createDate='" + createDate + '\'' +
-                ", isManager='" + isManager + '\'' +
+                ", updateDate='" + updateDate + '\'' +
+                ", manager='" + manager + '\'' +
                 '}';
     }
 }

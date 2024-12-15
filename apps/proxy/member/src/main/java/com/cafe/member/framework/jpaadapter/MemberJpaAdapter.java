@@ -13,8 +13,12 @@ public class MemberJpaAdapter implements MemberOutputPort {
     private final MemberRepository memberRepository;
 
     @Override
+    public Optional<Member> loadMemberById(Long id) {
+        return memberRepository.findById(id);
+    }
+
     public Optional<Member> loadMemberByUserId(String userId) {
-        return memberRepository.findMemberByUserId(userId);
+        return memberRepository.findByUserId(userId);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.cafe.member.application.usecase.AddMemberUsecase;
 import com.cafe.member.domain.model.Member;
 import com.cafe.member.framework.web.dto.MemberInfoDTO;
 import com.cafe.member.framework.web.dto.MemberOutputDTO;
+import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class AddMemberInputPort implements AddMemberUsecase {
         Optional<Member> loadMember = memberOutputPort.loadMemberByUserId(memberInfoDTO.getUserId());
 
         if (loadMember.isPresent()) {
-            throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+            throw new DuplicateRequestException("이미 사용중인 아이디입니다.");
         }
 
         Member addMember = Member.createMember(memberInfoDTO.getUserId()
