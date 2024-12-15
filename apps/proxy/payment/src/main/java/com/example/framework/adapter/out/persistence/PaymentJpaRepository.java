@@ -1,4 +1,4 @@
-package com.example.framework.adapter.out;
+package com.example.framework.adapter.out.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

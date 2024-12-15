@@ -1,4 +1,4 @@
-package com.example.framework.adapter.in.web.dto;
+package com.example.framework.adapter.in.web.dto.in;
 
 import lombok.Getter;
 

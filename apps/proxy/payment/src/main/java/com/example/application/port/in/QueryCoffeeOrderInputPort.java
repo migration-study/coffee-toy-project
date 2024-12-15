@@ -1,5 +1,5 @@
 package com.example.application.port.in;
 
-public interface QueryOrderInputPort {
+public interface QueryCoffeeOrderInputPort {
     void queryOrder();
 }

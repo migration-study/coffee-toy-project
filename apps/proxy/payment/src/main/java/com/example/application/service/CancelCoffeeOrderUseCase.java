@@ -1,16 +1,16 @@
 package com.example.application.service;
 
-import com.example.application.port.in.CancelOrderInputPort;
+import com.example.application.port.in.CancelCoffeeOrderInputPort;
 import com.example.application.port.out.LoadOrderOutputPort;
-import com.example.framework.adapter.in.web.dto.CancelOrderIn;
-import com.example.framework.adapter.in.web.dto.CancelOrderOut;
+import com.example.framework.adapter.in.web.dto.in.CancelOrderIn;
+import com.example.framework.adapter.in.web.dto.out.CancelOrderOut;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CancelOrderUseCase implements CancelOrderInputPort {
+public class CancelCoffeeOrderUseCase implements CancelCoffeeOrderInputPort {
     private final LoadOrderOutputPort repository;
 
-    public CancelOrderUseCase(LoadOrderOutputPort repository) {
+    public CancelCoffeeOrderUseCase(LoadOrderOutputPort repository) {
         this.repository = repository;
     }
 
