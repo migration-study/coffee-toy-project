@@ -1,7 +1,7 @@
 package com.cafe.member.application.input;
 
 import com.cafe.member.application.output.MemberOutputPort;
-import com.cafe.member.application.usecase.AddMemberUsecase;
+import com.cafe.member.application.usecase.AddMemberUseCase;
 import com.cafe.member.domain.model.Member;
 import com.cafe.member.framework.web.dto.MemberInfoDTO;
 import com.cafe.member.framework.web.dto.MemberOutputDTO;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AddMemberInputPort implements AddMemberUsecase {
+public class AddMemberInputPort implements AddMemberUseCase {
     private final MemberOutputPort memberOutputPort;
 
     @Override
