@@ -1,5 +1,6 @@
 package com.example.framework.adapter.out.persistence;
 
+import com.example.domain.entity.Payment;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,9 @@ public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // 자동 증가 전략
     private Long id;
+
+    @Column(name = "order_id", nullable = false)
+    private String orderId;
 
     @Column(name = "member_id", nullable = false)
     private Long memberId;
@@ -34,4 +38,30 @@ public class PaymentEntity {
 
     @Column(name = "payment_gateway_id")
     private String paymentGatewayId;
+
+    public PaymentEntity(String orderId,
+                         Long memberId,
+                         String coffeeMenu,
+                         BigDecimal coffeePrice,
+                         String paymentStatus,
+                         String paymentGatewayId) {
+        this.orderId = orderId;
+        this.memberId = memberId;
+        this.coffeeMenu = coffeeMenu;
+        this.coffeePrice = coffeePrice;
+        this.createdAt = LocalDateTime.now();
+        this.paymentStatus = paymentStatus;
+        this.paymentGatewayId = paymentGatewayId;
+    }
+
+    public static PaymentEntity createOrder(String orderId,
+                                            Long memberId,
+                                            String coffeeMenu,
+                                            BigDecimal coffeePrice,
+                                            String paymentStatus,
+                                            String paymentGatewayId) {
+        return new PaymentEntity(
+                orderId, memberId, coffeeMenu, coffeePrice, paymentStatus, paymentGatewayId
+        );
+    }
 }

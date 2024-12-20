@@ -26,7 +26,7 @@ public class PaymentController {
     public ResponseEntity<CreateOrderOut> crateOrder(
             @RequestBody CreateOrderIn orderIn
     ) {
-        System.out.println("커피 결제 요청 : " + orderIn);
+        System.out.println("커피 주문 요청 : " + orderIn);
         CreateOrderOut orderOut = createCoffeeIOrderInputPort.createOrder(orderIn);
         return ResponseEntity.ok(orderOut);
     }

@@ -6,4 +6,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class CreateOrderOut {
+    private String result;
+
+    public CreateOrderOut(String result) {
+        this.result = result;
+    }
+
+    public static CreateOrderOut createSuccess() {
+        return new CreateOrderOut("SUCCESS");
+    }
 }

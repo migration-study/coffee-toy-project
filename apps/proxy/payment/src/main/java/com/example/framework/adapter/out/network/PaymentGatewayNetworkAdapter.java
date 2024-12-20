@@ -1,7 +1,8 @@
 package com.example.framework.adapter.out.network;
 
 import com.example.application.port.out.PaymentGatewayOutputPort;
-import com.example.framework.adapter.out.network.response.RequestPaymentResponse;
+import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,9 +26,9 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
     }
 
     @Override
-    public boolean requestPayment() {
+    public GraphQLRequestPaymentResponse.RequestPaymentResponseData requestPayment() {
         // GraphQL 쿼리 및 변수 설정
-        String query = "mutation createPayment($request: CreatePaymentRequest!) { createPayment(request: $request) { paymentId result } }";
+        String query = PaymentGatewayInfo.CREATE_PAYMENT_GRAPHQL_QUERY.value;
 
         // 요청 변수 설정
         Map<String, Object> variables = new HashMap<>();
@@ -50,14 +51,24 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
         // GraphQL 서버에 POST 요청 보내기
-        URI url = UriComponentsBuilder.fromUriString(PG_END_POINT).build().toUri();
-        RequestPaymentResponse response = restTemplate.exchange(
-                url, HttpMethod.POST, entity, RequestPaymentResponse.class
+        URI url = UriComponentsBuilder.fromUriString(PaymentGatewayInfo.PG_END_POINT.value)
+                .build()
+                .toUri();
+        GraphQLRequestPaymentResponse response = restTemplate.exchange(
+                url, HttpMethod.POST, entity, GraphQLRequestPaymentResponse.class
                 ).getBody();
 
         // 응답 처리 (결과에 따른 로직 추가)
         System.out.println("PG 결제 응답 : " + response);
 
-        return false;  // 실패 처리
+        return response.getData().getCreatePayment();
+    }
+
+    @AllArgsConstructor
+    private enum PaymentGatewayInfo {
+        PG_END_POINT("http://localhost:7070/graphql"),
+        CREATE_PAYMENT_GRAPHQL_QUERY("\"mutation createPayment($request: CreatePaymentRequest!) { createPayment(request: $request) { paymentId result } }");
+
+        private String value;
     }
 }

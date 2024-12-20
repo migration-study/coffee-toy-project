@@ -2,6 +2,6 @@ package com.example.application.port.out;
 
 import com.example.domain.entity.Payment;
 
-public interface LoadOrderOutputPort {
+public interface LoadCoffeeOrderOutputPort {
     Payment loadPayment();
 }

@@ -2,26 +2,36 @@ package com.example.application.service;
 
 import com.example.application.port.in.CreateCoffeeIOrderInputPort;
 import com.example.application.port.out.PaymentGatewayOutputPort;
+import com.example.application.port.out.SaveOrderOutputPort;
 import com.example.domain.entity.Payment;
 import com.example.framework.adapter.in.web.dto.in.CreateOrderIn;
 import com.example.framework.adapter.in.web.dto.out.CreateOrderOut;
+import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CreateCoffeeIOrderUseCase implements CreateCoffeeIOrderInputPort {
+    private final SaveOrderOutputPort saveOrderOutputPort;
     private final PaymentGatewayOutputPort paymentGatewayOutputPort;
 
     @Override
     public CreateOrderOut createOrder(CreateOrderIn orderIn) {
         Payment payment = createOrderInToPayment(orderIn);
 
-        paymentGatewayOutputPort.requestPayment();
+        GraphQLRequestPaymentResponse.RequestPaymentResponseData response =
+                paymentGatewayOutputPort.requestPayment();
 
-        // PG사 API를 통해 id에 해당하는 결제 정보를 반환
-        // return new Payment();
-        return null;
+        /**
+         * ToDO
+         * - 결제 성공 또는 실패에 따른 UPDATE 로직 추가 필요
+         */
+        payment.setPaymentGatewayId(response.getPaymentId().toString());
+        payment.updateComplete();
+        saveOrderOutputPort.save(payment);
+
+        return CreateOrderOut.createSuccess();
     }
 
     private Payment createOrderInToPayment(CreateOrderIn orderIn) {
