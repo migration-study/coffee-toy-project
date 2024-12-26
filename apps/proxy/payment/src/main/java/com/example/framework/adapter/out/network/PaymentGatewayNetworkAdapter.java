@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,16 +27,18 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
     }
 
     @Override
-    public GraphQLRequestPaymentResponse.RequestPaymentResponseData requestPayment() {
+    public GraphQLRequestPaymentResponse.RequestPaymentResponseData requestPayment(
+            String paymentId, String merchantId, BigDecimal price)
+    {
         // GraphQL 쿼리 및 변수 설정
         String query = PaymentGatewayInfo.CREATE_PAYMENT_GRAPHQL_QUERY.value;
 
         // 요청 변수 설정
         Map<String, Object> variables = new HashMap<>();
         Map<String, Object> request = new HashMap<>();
-        request.put("orderId", "temp_orderId");
-        request.put("merchantId", "temp_merchantId");
-        request.put("price", 4500);
+        request.put("orderId", paymentId);
+        request.put("merchantId", merchantId);
+        request.put("price", price);
         variables.put("request", request);
 
         // 요청 본문 구성
@@ -56,7 +59,7 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
                 .toUri();
         GraphQLRequestPaymentResponse response = restTemplate.exchange(
                 url, HttpMethod.POST, entity, GraphQLRequestPaymentResponse.class
-                ).getBody();
+        ).getBody();
 
         // 응답 처리 (결과에 따른 로직 추가)
         System.out.println("PG 결제 응답 : " + response);
@@ -67,7 +70,7 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
     @AllArgsConstructor
     private enum PaymentGatewayInfo {
         PG_END_POINT("http://localhost:7070/graphql"),
-        CREATE_PAYMENT_GRAPHQL_QUERY("\"mutation createPayment($request: CreatePaymentRequest!) { createPayment(request: $request) { paymentId result } }");
+        CREATE_PAYMENT_GRAPHQL_QUERY("mutation createPayment($request: CreatePaymentRequest!) { createPayment(request: $request) { paymentId result } }");
 
         private String value;
     }

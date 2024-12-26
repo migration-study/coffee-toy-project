@@ -21,7 +21,11 @@ public class CreateCoffeeIOrderUseCase implements CreateCoffeeIOrderInputPort {
         Payment payment = createOrderInToPayment(orderIn);
 
         GraphQLRequestPaymentResponse.RequestPaymentResponseData response =
-                paymentGatewayOutputPort.requestPayment();
+                paymentGatewayOutputPort.requestPayment(
+                        payment.getId(),
+                        "MIGRATION_CAFE",
+                        payment.getCoffeePrice()
+                );
 
         /**
          * ToDO
