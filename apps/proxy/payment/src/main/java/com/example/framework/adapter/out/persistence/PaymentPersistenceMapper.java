@@ -16,4 +16,15 @@ public class PaymentPersistenceMapper {
                 payment.getPaymentGatewayId()
         );
     }
+
+    public Payment entityToDomain(PaymentEntity paymentEntity) {
+        return Payment.createFromEntity(
+                paymentEntity.getOrderId(),
+                paymentEntity.getMemberId(),
+                paymentEntity.getCoffeeMenu(),
+                paymentEntity.getCoffeePrice(),
+                paymentEntity.getPaymentStatus(),
+                paymentEntity.getPaymentGatewayId()
+        );
+    }
 }

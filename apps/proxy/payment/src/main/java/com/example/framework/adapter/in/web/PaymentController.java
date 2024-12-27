@@ -28,14 +28,17 @@ public class PaymentController {
     ) {
         System.out.println("커피 주문 요청 : " + orderIn);
         CreateOrderOut orderOut = createCoffeeIOrderInputPort.createOrder(orderIn);
+        System.out.println("커피 주문 응답 : " + orderOut);
         return ResponseEntity.ok(orderOut);
     }
 
-    @PostMapping("/{id}/cancel")
+    @PostMapping("/cancel")
     public ResponseEntity<CancelOrderOut> cancelOrder(
-            @RequestBody CancelOrderIn cancelOrderIn)
-    {
+            @RequestBody CancelOrderIn cancelOrderIn
+    ) {
+        System.out.println("커피 주문 취소 요청 : " + cancelOrderIn);
         CancelOrderOut cancelOrderOut = cancelCoffeeOrderInputPort.cancelOrder(cancelOrderIn);
+        System.out.println("커피 주문 취소 응답 : " + cancelOrderOut);
         return ResponseEntity.ok(cancelOrderOut);
     }
 }

@@ -9,6 +9,7 @@ import com.example.framework.adapter.in.web.dto.out.CreateOrderOut;
 import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class CreateCoffeeIOrderUseCase implements CreateCoffeeIOrderInputPort {
     private final PaymentGatewayOutputPort paymentGatewayOutputPort;
 
     @Override
+    @Transactional
     public CreateOrderOut createOrder(CreateOrderIn orderIn) {
         Payment payment = createOrderInToPayment(orderIn);
 
@@ -26,7 +28,6 @@ public class CreateCoffeeIOrderUseCase implements CreateCoffeeIOrderInputPort {
                         "MIGRATION_CAFE",
                         payment.getCoffeePrice()
                 );
-
         /**
          * ToDO
          * - 결제 성공 또는 실패에 따른 UPDATE 로직 추가 필요

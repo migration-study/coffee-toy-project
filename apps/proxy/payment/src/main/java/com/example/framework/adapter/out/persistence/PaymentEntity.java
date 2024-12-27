@@ -1,12 +1,13 @@
 package com.example.framework.adapter.out.persistence;
 
-import com.example.domain.entity.Payment;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "payments")
 @NoArgsConstructor
@@ -63,5 +64,12 @@ public class PaymentEntity {
         return new PaymentEntity(
                 orderId, memberId, coffeeMenu, coffeePrice, paymentStatus, paymentGatewayId
         );
+    }
+
+    public void completeCancel(String paymentStatus) {
+        if (!"CANCEL".equals(paymentStatus)) {
+            throw new IllegalStateException();
+        }
+        this.paymentStatus = paymentStatus;
     }
 }

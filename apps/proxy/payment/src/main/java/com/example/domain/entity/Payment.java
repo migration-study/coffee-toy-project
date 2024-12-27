@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -17,7 +16,7 @@ public class Payment {
     @Getter private BigDecimal coffeePrice;
     @Getter private PaymentStatus status;
 
-    @Getter @Setter  private String paymentGatewayId;
+    @Getter @Setter private String paymentGatewayId;
 
     public Payment(Long memberId, String coffeeMenu, BigDecimal coffeePrice) {
         this.id = UUID.randomUUID().toString();
@@ -27,11 +26,36 @@ public class Payment {
         this.status = PaymentStatus.PENDING;
     }
 
+    public Payment(String id,
+                   Long memberId,
+                   String coffeeMenu,
+                   BigDecimal coffeePrice,
+                   String status,
+                   String paymentGatewayId) {
+        this(memberId, coffeeMenu, coffeePrice);
+        this.id = id;
+        this.status = PaymentStatus.getPaymentStatus(status);
+        this.paymentGatewayId = paymentGatewayId;
+    }
+
     public static Payment createPayment(Long memberId, String coffeeMenu, BigDecimal coffeePrice) {
         return new Payment(memberId, coffeeMenu, coffeePrice);
     }
 
+    public static Payment createFromEntity(String id,
+                                           Long memberId,
+                                           String coffeeMenu,
+                                           BigDecimal coffeePrice,
+                                           String status,
+                                           String paymentGatewayId) {
+        return new Payment(id, memberId, coffeeMenu, coffeePrice, status, paymentGatewayId);
+    }
+
     public void updateComplete() {
         this.status = PaymentStatus.PAID;
+    }
+
+    public void updateCancel() {
+        this.status = PaymentStatus.CANCELED;
     }
 }
