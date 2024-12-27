@@ -7,20 +7,18 @@ import com.example.framework.adapter.in.web.dto.in.CancelOrderIn;
 import com.example.framework.adapter.in.web.dto.in.CreateOrderIn;
 import com.example.framework.adapter.in.web.dto.out.CancelOrderOut;
 import com.example.framework.adapter.in.web.dto.out.CreateOrderOut;
+import com.example.framework.adapter.in.web.dto.out.RetrieveOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/payments")
 public class PaymentController {
     private final CreateCoffeeIOrderInputPort createCoffeeIOrderInputPort;
-    private final QueryCoffeeOrderInputPort queryCoffeeOrderInputPort;
     private final CancelCoffeeOrderInputPort cancelCoffeeOrderInputPort;
+    private final QueryCoffeeOrderInputPort queryCoffeeOrderInputPort;
 
     @PostMapping("/order")
     public ResponseEntity<CreateOrderOut> crateOrder(
@@ -40,5 +38,15 @@ public class PaymentController {
         CancelOrderOut cancelOrderOut = cancelCoffeeOrderInputPort.cancelOrder(cancelOrderIn);
         System.out.println("커피 주문 취소 응답 : " + cancelOrderOut);
         return ResponseEntity.ok(cancelOrderOut);
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<RetrieveOut> retrieveOrder(
+            @PathVariable(value = "orderId") String orderId
+    ) {
+        System.out.println("커피 주문 조회 요청 : " + orderId);
+        RetrieveOut retrieveOut = queryCoffeeOrderInputPort.queryOrder(orderId);
+        System.out.println("커피 주문 조회 응답 : " + retrieveOut);
+        return ResponseEntity.ok(retrieveOut);
     }
 }
