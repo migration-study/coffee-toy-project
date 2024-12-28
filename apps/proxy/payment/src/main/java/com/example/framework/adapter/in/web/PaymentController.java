@@ -1,8 +1,6 @@
 package com.example.framework.adapter.in.web;
 
-import com.example.application.port.in.CancelCoffeeOrderInputPort;
-import com.example.application.port.in.CreateCoffeeIOrderInputPort;
-import com.example.application.port.in.QueryCoffeeOrderInputPort;
+import com.example.application.port.in.CoffeeOrderInputPort;
 import com.example.framework.adapter.in.web.dto.in.CancelOrderIn;
 import com.example.framework.adapter.in.web.dto.in.CreateOrderIn;
 import com.example.framework.adapter.in.web.dto.out.CancelOrderOut;
@@ -16,16 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/payments")
 public class PaymentController {
-    private final CreateCoffeeIOrderInputPort createCoffeeIOrderInputPort;
-    private final CancelCoffeeOrderInputPort cancelCoffeeOrderInputPort;
-    private final QueryCoffeeOrderInputPort queryCoffeeOrderInputPort;
+    private final CoffeeOrderInputPort coffeeOrderInputPort;
 
     @PostMapping("/order")
     public ResponseEntity<CreateOrderOut> crateOrder(
             @RequestBody CreateOrderIn orderIn
     ) {
         System.out.println("커피 주문 요청 : " + orderIn);
-        CreateOrderOut orderOut = createCoffeeIOrderInputPort.createOrder(orderIn);
+        CreateOrderOut orderOut = coffeeOrderInputPort.createOrder(orderIn);
         System.out.println("커피 주문 응답 : " + orderOut);
         return ResponseEntity.ok(orderOut);
     }
@@ -35,7 +31,7 @@ public class PaymentController {
             @RequestBody CancelOrderIn cancelOrderIn
     ) {
         System.out.println("커피 주문 취소 요청 : " + cancelOrderIn);
-        CancelOrderOut cancelOrderOut = cancelCoffeeOrderInputPort.cancelOrder(cancelOrderIn);
+        CancelOrderOut cancelOrderOut = coffeeOrderInputPort.cancelOrder(cancelOrderIn);
         System.out.println("커피 주문 취소 응답 : " + cancelOrderOut);
         return ResponseEntity.ok(cancelOrderOut);
     }
@@ -45,7 +41,7 @@ public class PaymentController {
             @PathVariable(value = "orderId") String orderId
     ) {
         System.out.println("커피 주문 조회 요청 : " + orderId);
-        RetrieveOut retrieveOut = queryCoffeeOrderInputPort.queryOrder(orderId);
+        RetrieveOut retrieveOut = coffeeOrderInputPort.queryOrder(orderId);
         System.out.println("커피 주문 조회 응답 : " + retrieveOut);
         return ResponseEntity.ok(retrieveOut);
     }

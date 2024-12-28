@@ -1,9 +1,8 @@
 package com.example.application.service;
 
-import com.example.application.port.in.CancelCoffeeOrderInputPort;
 import com.example.application.port.out.LoadCoffeeOrderOutputPort;
 import com.example.application.port.out.PaymentGatewayOutputPort;
-import com.example.application.port.out.SaveOrderOutputPort;
+import com.example.application.port.out.SaveCoffeeOrderOutputPort;
 import com.example.domain.entity.Payment;
 import com.example.framework.adapter.in.web.dto.in.CancelOrderIn;
 import com.example.framework.adapter.in.web.dto.out.CancelOrderOut;
@@ -16,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CancelCoffeeOrderUseCase implements CancelCoffeeOrderInputPort {
     private final LoadCoffeeOrderOutputPort repository;
-    private final SaveOrderOutputPort saveOrderOutputPort;
+    private final SaveCoffeeOrderOutputPort saveCoffeeOrderOutputPort;
     private final PaymentGatewayOutputPort paymentGatewayOutputPort;
 
     @Override
@@ -36,7 +35,7 @@ public class CancelCoffeeOrderUseCase implements CancelCoffeeOrderInputPort {
             payment.updateCancel();
         }
 
-        saveOrderOutputPort.save(payment);
+        saveCoffeeOrderOutputPort.save(payment);
 
         return CancelOrderOut.createSuccess();
     }

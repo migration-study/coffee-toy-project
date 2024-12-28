@@ -3,7 +3,7 @@ package com.example.framework.adapter.out.network.response;
 import lombok.Data;
 
 @Data
-public class GraphQLRequestPaymentResponse {
+public class GraphQLPaymentResponse {
     private RequestPaymentResponse data;
 
     @Data
@@ -20,7 +20,7 @@ public class GraphQLRequestPaymentResponse {
 
     @Data
     public static class RequestPaymentResponseData {
-        private Integer paymentId;
+        private String paymentId;
         private String result;
 
         @Override

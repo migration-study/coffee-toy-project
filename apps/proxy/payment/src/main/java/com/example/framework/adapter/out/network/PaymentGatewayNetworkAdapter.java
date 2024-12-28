@@ -2,7 +2,7 @@ package com.example.framework.adapter.out.network;
 
 import com.example.application.port.out.PaymentGatewayOutputPort;
 import com.example.framework.adapter.out.network.response.GraphQLCancelResponse;
-import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
+import com.example.framework.adapter.out.network.response.GraphQLPaymentResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
@@ -27,7 +27,7 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
     }
 
     @Override
-    public GraphQLRequestPaymentResponse.RequestPaymentResponseData requestPayment(
+    public GraphQLPaymentResponse.RequestPaymentResponseData requestPayment(
             String paymentId, String merchantId, BigDecimal price
     ) {
         // 요청 변수 설정
@@ -41,11 +41,11 @@ public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
         requestBody.put("query", PaymentGatewayInfo.CREATE_PAYMENT_GRAPHQL_QUERY.value);
         requestBody.put("variables", createVariables(request));
 
-        GraphQLRequestPaymentResponse response = restTemplate.exchange(
+        GraphQLPaymentResponse response = restTemplate.exchange(
                 fromPGUrl(),
                 HttpMethod.POST,
                 createEntity(requestBody),
-                GraphQLRequestPaymentResponse.class
+                GraphQLPaymentResponse.class
         ).getBody();
 
         System.out.println("PG 결제 응답 : " + response);

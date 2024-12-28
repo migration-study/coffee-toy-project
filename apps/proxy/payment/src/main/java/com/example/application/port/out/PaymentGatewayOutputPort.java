@@ -1,12 +1,12 @@
 package com.example.application.port.out;
 
 import com.example.framework.adapter.out.network.response.GraphQLCancelResponse;
-import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
+import com.example.framework.adapter.out.network.response.GraphQLPaymentResponse;
 
 import java.math.BigDecimal;
 
 public interface PaymentGatewayOutputPort {
-    GraphQLRequestPaymentResponse.RequestPaymentResponseData requestPayment(
+    GraphQLPaymentResponse.RequestPaymentResponseData requestPayment(
             String paymentId,
             String merchantId,
             BigDecimal price

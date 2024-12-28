@@ -1,6 +1,5 @@
 package com.example.application.service;
 
-import com.example.application.port.in.QueryCoffeeOrderInputPort;
 import com.example.application.port.out.LoadCoffeeOrderOutputPort;
 import com.example.domain.entity.Payment;
 import com.example.framework.adapter.in.web.dto.out.RetrieveOut;
