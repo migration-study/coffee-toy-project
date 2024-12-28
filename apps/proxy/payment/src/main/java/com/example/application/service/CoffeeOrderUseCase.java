@@ -34,15 +34,15 @@ public class CoffeeOrderUseCase implements CoffeeOrderInputPort {
                         "MIGRATION_CAFE",
                         payment.getCoffeePrice()
                 );
-        /**
-         * ToDO
-         * - 결제 성공 또는 실패에 따른 UPDATE 로직 추가 필요
-         */
-        payment.setPaymentGatewayId(response.getPaymentId().toString());
-        payment.updateComplete();
-        saveCoffeeOrderOutputPort.save(payment);
 
-        return CreateOrderOut.createSuccess();
+        if ("SUCCESS".equals(response.getResult())) {
+            payment.updateComplete(response.getPaymentId().toString());
+            saveCoffeeOrderOutputPort.save(payment);
+            return CreateOrderOut.createSuccess();
+        } else {
+            payment.updateFail();
+            return CreateOrderOut.createFail();
+        }
     }
 
     private Payment createOrderInToPayment(CreateOrderIn orderIn) {
@@ -62,17 +62,15 @@ public class CoffeeOrderUseCase implements CoffeeOrderInputPort {
                         payment.getOrderId(),
                         "MIGRATION_CAFE"
                 );
-        /**
-         * ToDo
-         * - 성공 및 실패에 따른 로직 처리 필요
-         */
+
         if ("SUCCESS".equals(response.getResult())) {
             payment.updateCancel();
+            saveCoffeeOrderOutputPort.save(payment);
+            return CancelOrderOut.createSuccess();
+        } else {
+            payment.updateFail();
+            return CancelOrderOut.createSuccess();
         }
-
-        saveCoffeeOrderOutputPort.save(payment);
-
-        return CancelOrderOut.createSuccess();
     }
 
     @Override

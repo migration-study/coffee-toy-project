@@ -16,7 +16,7 @@ public class Payment {
     @Getter private BigDecimal coffeePrice;
     @Getter private PaymentStatus status;
 
-    @Getter @Setter private String paymentGatewayId;
+    @Getter private String paymentGatewayId;
 
     public Payment(Long memberId, String coffeeMenu, BigDecimal coffeePrice) {
         this.orderId = UUID.randomUUID().toString();
@@ -51,11 +51,16 @@ public class Payment {
         return new Payment(id, memberId, coffeeMenu, coffeePrice, status, paymentGatewayId);
     }
 
-    public void updateComplete() {
+    public void updateComplete(String paymentGatewayId) {
+        this.paymentGatewayId = paymentGatewayId;
         this.status = PaymentStatus.PAID;
     }
 
     public void updateCancel() {
         this.status = PaymentStatus.CANCELED;
+    }
+
+    public void updateFail() {
+        this.status = PaymentStatus.PENDING;
     }
 }

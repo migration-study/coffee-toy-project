@@ -16,6 +16,10 @@ public class CreateOrderOut {
         return new CreateOrderOut("SUCCESS");
     }
 
+    public static CreateOrderOut createFail() {
+        return new CreateOrderOut("FAIL");
+    }
+
     @Override
     public String toString() {
         return "CreateOrderOut{" +
