@@ -15,4 +15,11 @@ public class CreateOrderOut {
     public static CreateOrderOut createSuccess() {
         return new CreateOrderOut("SUCCESS");
     }
+
+    @Override
+    public String toString() {
+        return "CreateOrderOut{" +
+                "result='" + result + '\'' +
+                '}';
+    }
 }

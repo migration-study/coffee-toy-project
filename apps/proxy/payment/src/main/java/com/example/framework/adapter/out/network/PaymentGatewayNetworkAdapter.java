@@ -4,7 +4,7 @@ import com.example.application.port.out.PaymentGatewayOutputPort;
 import com.example.framework.adapter.out.network.response.GraphQLCancelResponse;
 import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,9 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
 public class PaymentGatewayNetworkAdapter implements PaymentGatewayOutputPort {
     private final RestTemplate restTemplate;
+
+    public PaymentGatewayNetworkAdapter(final RestTemplateBuilder restTemplateBuilder) {
+        this.restTemplate = restTemplateBuilder.build();
+    }
 
     @Override
     public GraphQLRequestPaymentResponse.RequestPaymentResponseData requestPayment(

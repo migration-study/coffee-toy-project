@@ -8,14 +8,9 @@ import com.example.domain.entity.Payment;
 import com.example.framework.adapter.in.web.dto.in.CancelOrderIn;
 import com.example.framework.adapter.in.web.dto.out.CancelOrderOut;
 import com.example.framework.adapter.out.network.response.GraphQLCancelResponse;
-import com.example.framework.adapter.out.network.response.GraphQLRequestPaymentResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.bind.Nested;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +25,7 @@ public class CancelCoffeeOrderUseCase implements CancelCoffeeOrderInputPort {
         Payment payment = repository.loadPayment(cancelOrderIn.getOrderId());
         GraphQLCancelResponse.CancelResponseData response =
                 paymentGatewayOutputPort.requestCancel(
-                        payment.getId(),
+                        payment.getOrderId(),
                         "MIGRATION_CAFE"
                 );
         /**

@@ -15,6 +15,6 @@ public class QueryCoffeeOrderUseCase implements QueryCoffeeOrderInputPort {
     @Override
     public RetrieveOut queryOrder(String orderId) {
         Payment payment = loadCoffeeOrderOutputPort.loadPayment(orderId);
-        return new RetrieveOut(payment.getId(), payment.getStatus().toString());
+        return new RetrieveOut(payment.getOrderId(), payment.getStatus().toString());
     }
 }

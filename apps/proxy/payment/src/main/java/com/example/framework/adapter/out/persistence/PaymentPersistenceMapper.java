@@ -8,7 +8,7 @@ public class PaymentPersistenceMapper {
 
     public PaymentEntity domainToEntity(Payment payment) {
         return PaymentEntity.createOrder(
-                payment.getId(),
+                payment.getOrderId(),
                 payment.getMemberId(),
                 payment.getCoffeeMenu(),
                 payment.getCoffeePrice(),

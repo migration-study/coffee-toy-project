@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @NoArgsConstructor
 public class Payment {
-    @Getter private String id;
+    @Getter private String orderId;
     @Getter private Long memberId;
     @Getter private String coffeeMenu;
     @Getter private BigDecimal coffeePrice;
@@ -19,21 +19,21 @@ public class Payment {
     @Getter @Setter private String paymentGatewayId;
 
     public Payment(Long memberId, String coffeeMenu, BigDecimal coffeePrice) {
-        this.id = UUID.randomUUID().toString();
+        this.orderId = UUID.randomUUID().toString();
         this.memberId = memberId;
         this.coffeeMenu = coffeeMenu;
         this.coffeePrice = coffeePrice;
         this.status = PaymentStatus.PENDING;
     }
 
-    public Payment(String id,
+    public Payment(String orderId,
                    Long memberId,
                    String coffeeMenu,
                    BigDecimal coffeePrice,
                    String status,
                    String paymentGatewayId) {
         this(memberId, coffeeMenu, coffeePrice);
-        this.id = id;
+        this.orderId = orderId;
         this.status = PaymentStatus.getPaymentStatus(status);
         this.paymentGatewayId = paymentGatewayId;
     }
