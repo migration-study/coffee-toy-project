@@ -1,7 +1,6 @@
 package com.cafe.coffee.domain.model;
 
 import com.cafe.coffee.domain.vo.Creator;
-import com.cafe.coffee.framework.web.dto.CoffeeInfoDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

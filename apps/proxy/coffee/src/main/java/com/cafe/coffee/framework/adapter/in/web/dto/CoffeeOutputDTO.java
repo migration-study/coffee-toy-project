@@ -1,4 +1,4 @@
-package com.cafe.coffee.framework.web.dto;
+package com.cafe.coffee.framework.adapter.in.web.dto;
 
 import com.cafe.coffee.domain.model.Coffee;
 import lombok.Getter;

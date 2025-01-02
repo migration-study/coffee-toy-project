@@ -1,4 +1,4 @@
-package com.cafe.coffee.framework.web.dto;
+package com.cafe.coffee.framework.adapter.in.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
