@@ -23,6 +23,11 @@ public class GraphQLPaymentResponse {
         private String paymentId;
         private String result;
 
+        public RequestPaymentResponseData(String paymentId, String result) {
+            this.paymentId = paymentId;
+            this.result = result;
+        }
+
         @Override
         public String toString() {
             return "RequestPaymentResponse{" +
