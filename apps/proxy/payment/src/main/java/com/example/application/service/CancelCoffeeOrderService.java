@@ -32,10 +32,10 @@ public class CancelCoffeeOrderService implements CancelCoffeeOrderUseCase {
         if ("SUCCESS".equals(response.getResult())) {
             payment.updateCancel();
             saveCoffeeOrderOutputPort.save(payment);
-            return CancelOrderOut.createSuccess();
+            return CancelOrderOut.createSuccess(payment.getStatus().toString());
         } else {
             payment.updateFail();
-            return CancelOrderOut.createSuccess();
+            return CancelOrderOut.createFail(payment.getStatus().toString());
         }
     }
 }

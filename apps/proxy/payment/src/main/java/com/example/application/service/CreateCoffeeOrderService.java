@@ -18,7 +18,7 @@ public class CreateCoffeeOrderService implements CreateCoffeeOrderUseCase {
 
     @Override
     public CreateOrderOut createOrder(CreateOrderIn orderIn) {
-        Payment payment = createOrderInToPayment(orderIn);
+        Payment payment = orderIn.toPayment();
 
         GraphQLPaymentResponse.RequestPaymentResponseData response =
                 paymentGatewayOutputPort.requestPayment(
@@ -30,10 +30,10 @@ public class CreateCoffeeOrderService implements CreateCoffeeOrderUseCase {
         if ("SUCCESS".equals(response.getResult())) {
             payment.updateComplete(response.getPaymentId().toString());
             saveCoffeeOrderOutputPort.save(payment);
-            return CreateOrderOut.createSuccess();
+            return CreateOrderOut.createSuccess(payment.getStatus().toString());
         } else {
             payment.updateFail();
-            return CreateOrderOut.createFail();
+            return CreateOrderOut.createFail(payment.getStatus().toString());
         }
     }
 

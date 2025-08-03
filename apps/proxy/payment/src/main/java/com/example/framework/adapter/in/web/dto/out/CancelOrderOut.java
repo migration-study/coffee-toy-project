@@ -7,17 +7,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CancelOrderOut {
     private String result;
+    private String status;
 
-    public CancelOrderOut(String result) {
+    public CancelOrderOut(String result, String status) {
         this.result = result;
+        this.status = status;
     }
 
-    public static CancelOrderOut createSuccess() {
-        return new CancelOrderOut("SUCCESS");
+    public static CancelOrderOut createSuccess(String status) {
+        return new CancelOrderOut("SUCCESS", status);
     }
 
-    public static CancelOrderOut createFail() {
-        return new CancelOrderOut("FAIL");
+    public static CancelOrderOut createFail(String status) {
+        return new CancelOrderOut("FAIL", status);
     }
 
     @Override

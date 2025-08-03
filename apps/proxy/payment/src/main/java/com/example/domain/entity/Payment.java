@@ -57,6 +57,12 @@ public class Payment {
     }
 
     public void updateCancel() {
+        if (this.status != PaymentStatus.PAID) {
+            throw new IllegalStateException("결제가 완료 상태가 아니기에 결제 취소를 할 수 없습니다.");
+        }
+        if (this.status == PaymentStatus.PENDING) {
+            throw new IllegalStateException("결제가 보류 상태이기에 결제 취소를 할 수 없습니다.");
+        }
         this.status = PaymentStatus.CANCELED;
     }
 

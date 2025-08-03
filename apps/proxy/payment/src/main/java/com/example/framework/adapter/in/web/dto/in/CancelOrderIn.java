@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 public class CancelOrderIn {
     private String orderId;
 
+    public CancelOrderIn(String orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         return "CancelOrderIn{" +

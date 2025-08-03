@@ -30,6 +30,11 @@ public class GraphQLCancelResponse {
         private String orderId;
         private String result;
 
+        public CancelResponseData(String orderId, String result) {
+            this.orderId = orderId;
+            this.result = result;
+        }
+
         @Override
         public String toString() {
             return "CancelResponseData{" +
